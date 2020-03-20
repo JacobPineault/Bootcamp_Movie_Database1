@@ -11,6 +11,7 @@ create table actor (
     lastName		varchar(25)		not null,
     gender			varchar(6)		not null,
     birthDate		date			not null
+    -- constraint unq_actor (firstName, lastName, birthDate)
     );
     
 -- Create table for movies
@@ -30,9 +31,13 @@ create table credit (
     role			varchar(25)		not null,
     foreign key (movieID) references movie(id),
     foreign key (actorID) references actor(id)
+    -- constaint act_mov unique (actorID, movieID)
+    -- act_mov is a name used mostly for debugging. not relevent to other fields
     );
 
+-- All inserts are Data Manipulation Language
 -- values for Actor
+-- if you fill all fields you are not required to lable each insert statement
 insert into actor (id, firstName, lastName, gender, birthDate)
 	values (1, 'Tim', 'Robbins', 'Male', '1959-10-16');
 insert into actor (id, firstName, lastName, gender, birthDate)
@@ -55,6 +60,8 @@ insert into movie (id, title, year, rating, director)
 	values (3, 'The Green Mile', 1999, 'R', 'Frank Darabont');
     
 -- values for Credit
+-- if the ID is not called out in any other field for reference let the database handle the ID
+-- no need to add in manually as it no other tables are depentant on that ID
 insert into credit (id, actorID, movieID, role)
 	values (1, 1, 1, 'Andy Dufresne');
 insert into credit (id, actorID, movieID, role)
